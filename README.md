@@ -1,21 +1,98 @@
-#Autonomy
-
-*This project is currently an idea "in the works", it functions as advertised below,however things are/might change. 
-The code is just a few lines of bash at the moment,might move to python or other languages as needs change.* 
-
-
-----------
+# Autonomy
 
 
 ##Introduction (Why?)
 
-This project contains simple bash scripts and subnet lists used to implement blocks against the following organizations:
+This project contains simple bash scripts and subnet lists used to implement blocks against specific organizations.
+
+By default these are included:
 
 - Google (Includes Youtube,blogspot,doubleclick and any other google service under their AS)
 - Facebook (Includes Instagram,whatsapp and other facebook companies)
 - Twitter
 - Linkedin
 - Cloudflare
+
+A powershell script is also included which uses the RIPE Stat API (much better) as opposed to route servers and places windows firewall rule blocks for the subnets in question. 
+
+
+##Instructions
+
+1. clone this repository or download and extract the zip file for it. 
+
+2. Run 'cd autonomy' 
+
+3. Run 'chmod a+x ./block.sh'
+
+4. Run './block.sh' and follow the instructions. 
+
+P.S.: These instructions are meant for those who are new to *nix or are not comfortable with the command line yet. 
+
+### ASN2IP.sh
+ This is just a script that logs into route-server.ip.att.net and fetches all subnets associated with the selected Autonomous System Number.
+ 
+ Without arguments it will echo (list) all the subnets.
+ if -b is specified it will implement an iptables block for each subnet found.
+ 
+ Optionally you can specify the ASN and it will operate on it accordingly. 
+ 
+ Examples:
+
+> 	#blocks google by default 
+> 	./asn2ip.sh 	
+>      #NTT
+>        ./asn2ip 1294 
+> 	#Microsoft 	
+>        ./asn2ip -b 8068
+
+### asnblock.ps1 Usage
+You'll probably need to set the right execution policy and run 'Unblock-Script .\asnblock.ps1' to allow a remotely fetched script to run.
+
+Example commands:
+
+- `.\asnblackhole.ps1 -ASN 15169 -V4 -V6 -Type Both`
+- `.\asnblackhole.ps1 -ASN 15169 -V4 -V6 -Type Both -Unblock`
+- `.\asnblackhole.ps1 -ASN 15169 -V4  -Type Originating`	
+
+### Fine tuning Firefox
+ 1. Type 'about:config' in the navigation bar (accept if it wars you that your warranty will be 'void')
+ 2. Search for 'network.http.connection-timeout' and 'network.http.response.timeout' set both to 5 (this is in seconds, adjust as needed,don't set it under 3
+
+ 
+
+### Fine tuning Google Chrome
+ I haven't tasted these instructions,not so surprisingly google refuses to implement the same adjustable options firefox has.
+ 
+ However someone here claims InternetExplorer settings affect chrome as well: https://superuser.com/questions/633648/how-can-i-change-the-default-website-connection-timeout-in-chrome
+ 
+ I have pasted their instructions below(again,untested):
+ 
+1. Click Start, click Run, type regedit, and then click OK.
+
+2. Locate and then click the following key in the registry: HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\InternetSettings
+
+3. On the Edit menu, point to New, and then click DWORD Value.
+
+4. Type "KeepAliveTimeout", and then press ENTER.
+
+5. On the Edit menu, click Modify.
+
+6. Type the appropriate time-out value (in milliseconds), and then click OK. For example, to set the time-out value to two minutes, type 120000.
+
+7. Type "ServerInfoTimeout" and set too.
+
+8. Restart machine.
+
+# Contact
+
+Pop in ##hackers on freenode , I will see any questions or comments when I'm around and respond(no dedicated channel for this project yet)
+
+Feel free to open a github issue or Pull request as well. 
+
+If you feel like more organizations or AS' should be added,please let me know. 
+
+
+# Propaganda
 
 The widespread and hard to avoid nature of the sites and services these organizations offer
 poses a privacy concern for some individuals. 
@@ -59,73 +136,3 @@ or some how cause them harm(or accuse them of malicious intentions).
 
 
 ----------
-
-
-##Instructions
-
-1. clone this repository or download and extract the zip file for it. 
-
-2. Run 'cd autonomy' 
-
-3. Run 'chmod a+x ./block.sh'
-
-4. Run './block.sh' and follow the instructions. 
-
-P.S.: These instructions are meant for those who are new to *nix or are not comfortable with the command line yet. 
-
-### ASN2IP.sh
- This is just a script that logs into route-server.ip.att.net and fetches all subnets associated with the selected Autonomous System Number.
- 
- Without arguments it will echo (list) all the subnets.
- if -b is specified it will implement an iptables block for each subnet found.
- 
- Optionally you can specify the ASN and it will operate on it accordingly. 
- 
- Examples:
-
-> 	#blocks google by default 
-> 	./asn2ip.sh 	
->      #NTT
->        ./asn2ip 1294 
-> 	#Microsoft 	
->        ./asn2ip -b 8068
-
-	
-### Fine tuning Firefox
- 1. Type 'about:config' in the navigation bar (accept if it wars you that your warranty will be 'void')
- 2. Search for 'network.http.connection-timeout' and 'network.http.response.timeout' set both to 5 (this is in seconds, adjust as needed,don't set it under 3
-
- 
-
-### Fine tuning Google Chrome
- I haven't tasted these instructions,not so surprisingly google refuses to implement the same adjustable options firefox has.
- 
- However someone here claims InternetExplorer settings affect chrome as well: https://superuser.com/questions/633648/how-can-i-change-the-default-website-connection-timeout-in-chrome
- 
- I have pasted their instructions below(again,untested):
- 
-1. Click Start, click Run, type regedit, and then click OK.
-
-2. Locate and then click the following key in the registry: HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\InternetSettings
-
-3. On the Edit menu, point to New, and then click DWORD Value.
-
-4. Type "KeepAliveTimeout", and then press ENTER.
-
-5. On the Edit menu, click Modify.
-
-6. Type the appropriate time-out value (in milliseconds), and then click OK. For example, to set the time-out value to two minutes, type 120000.
-
-7. Type "ServerInfoTimeout" and set too.
-
-8. Restart machine.
-
-# Contact
-
-Pop in ##hackers on freenode , I will see any questions or comments when I'm around and respond(no dedicated channel for this project yet)
-
-Feel free to open a github issue or Pull request as well. 
-
-If you feel like more organizations or AS' should be added,please let me know. 
-
-
