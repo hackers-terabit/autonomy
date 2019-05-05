@@ -52,13 +52,7 @@ if(-not $V4 -and $V6){
 	$V6=$true
 }
 try{
-	$interfaces = Get-WmiObject Win32_NetworkAdapter
-	$interfacelist = new-object System.Collections.ArrayList]
-	$interfaces | foreach {
-    	$friendlyname = $_ | Select-Object -ExpandProperty NetConnectionID
-   		$name = $_.GetRelated("Win32_PnPEntity") | Select-Object -ExpandProperty Name
-   		$interfacelist.Add($name)
-	}
+
 	[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 	$RIPEURI = "https://stat.ripe.net/data/ris-prefixes/data.json?resource=$ASN&af=$af&types=$types&noise=keep&list_prefixes=true"
 	Write-Host "Getting Prefixes using URI: $RIPEURI"
