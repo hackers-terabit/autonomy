@@ -16,7 +16,7 @@ By default these are included:
 A powershell script is also included which uses the RIPE Stat API (much better) as opposed to route servers and places windows firewall rule blocks for the subnets in question. 
 
 
-##Instructions
+## Instructions
 
 1. clone this repository or download and extract the zip file for it. 
 
@@ -113,7 +113,7 @@ As a secondary concern, these organizations actively engage in tracking users ac
 Often without direct consent(even when consent is available,declining means their refusal to offer services to the user),
 Most users have little to null knowledge about data-mining and the dramatic effect it can have, not just on them but on their society and communities. Historically, those who have power keep and use it for themselves,the powerful nature of mass surveillance and unrestrained documentation of people is a serious risk to the people against whom such information can be used.
 
-Many fears alluded to paranoia (with respect to corporate and government surveillance) have left even the most creative conspiracy theorists surprised when revealed to be true. Therefore concern over these few corporations using he data they collect against their users to a harmful end is not paranoia but a legitimate concern everyone depending on the internet should have. 
+Many fears alluded to paranoia (with respect to corporate and government surveillance) have left even the most creative conspiracy theorists surprised when revealed to be true. Therefore concern over these few corporations using the data they collect against their users to a harmful end is not paranoia but a legitimate concern everyone depending on the internet should have. 
 
 
 > "We learn from history that we do not learn from history."
